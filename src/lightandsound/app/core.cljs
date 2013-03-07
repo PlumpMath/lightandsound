@@ -4,6 +4,9 @@
             [lightandsound.systems :as sys])
   (:use [lightandsound.systems.graphics :only [graphics-system]]))
 
+(defn get-global-values
+  [] {})
+
 ;; Have to have this be global so it's in scope of callbacks.
 (def entities (atom {:best-quantum [(comp/position 1 1 1)]}))
 (def systems [(graphics-system)])
@@ -14,7 +17,8 @@
   (doseq [s systems]
     (let [needed-components (sys/components s)
           needed-entities (ent/get-with-components @entities needed-components)
-          changed (sys/run s needed-entities)]
+          globals (get-global-values)
+          changed (sys/run s globals needed-entities)]
       (swap! entities ent/change-entities changed)))
 )
 

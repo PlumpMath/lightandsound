@@ -1,6 +1,5 @@
 (ns lightandsound.systems.graphics
   (:use [lightandsound.systems :only [PSystem]]))
-;; call three.js from here
 
 ;; for now render everything as quanta
 (defrecord GraphicsSystem [camera scene renderer quanta]
@@ -10,7 +9,7 @@
     (set! (.-z (.-position camera)) 1000)
     (.setSize renderer (.-innerWidth js/window) (.-innerHeight js/window))
     (.appendChild js/document.body (.-domElement renderer)))
-  (run [_ entities]
+  (run [_ globals entities]
     ;; Create any quantums that aren't already in the scene
     (let [current @quanta]
       (doseq [ent entities]
@@ -29,6 +28,7 @@
           )))
     (.render renderer scene camera))
 )
+
 (defn graphics-system
   []
   (GraphicsSystem. (js/THREE.PerspectiveCamera.
