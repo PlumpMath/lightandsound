@@ -487,6 +487,19 @@ goog.base = function(me, opt_methodName, var_args) {
 goog.scope = function(fn) {
   fn.call(goog.global)
 };
+goog.provide("goog.debug.Error");
+goog.debug.Error = function(opt_msg) {
+  if(Error.captureStackTrace) {
+    Error.captureStackTrace(this, goog.debug.Error)
+  }else {
+    this.stack = (new Error).stack || ""
+  }
+  if(opt_msg) {
+    this.message = String(opt_msg)
+  }
+};
+goog.inherits(goog.debug.Error, Error);
+goog.debug.Error.prototype.name = "CustomError";
 goog.provide("goog.string");
 goog.provide("goog.string.Unicode");
 goog.string.Unicode = {NBSP:"\u00a0"};
@@ -927,19 +940,6 @@ goog.string.parseInt = function(value) {
   }
   return NaN
 };
-goog.provide("goog.debug.Error");
-goog.debug.Error = function(opt_msg) {
-  if(Error.captureStackTrace) {
-    Error.captureStackTrace(this, goog.debug.Error)
-  }else {
-    this.stack = (new Error).stack || ""
-  }
-  if(opt_msg) {
-    this.message = String(opt_msg)
-  }
-};
-goog.inherits(goog.debug.Error, Error);
-goog.debug.Error.prototype.name = "CustomError";
 goog.provide("goog.asserts");
 goog.provide("goog.asserts.AssertionError");
 goog.require("goog.debug.Error");
@@ -21426,21 +21426,21 @@ lightandsound.entities.get_types = function get_types(components) {
 };
 lightandsound.entities.get_with_components = function get_with_components(entity_map, components) {
   return cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, function() {
-    var iter__2625__auto__ = function iter__13233(s__13234) {
+    var iter__2625__auto__ = function iter__2975(s__2976) {
       return new cljs.core.LazySeq(null, false, function() {
-        var s__13234__$1 = s__13234;
+        var s__2976__$1 = s__2976;
         while(true) {
-          var temp__4100__auto__ = cljs.core.seq.call(null, s__13234__$1);
+          var temp__4100__auto__ = cljs.core.seq.call(null, s__2976__$1);
           if(temp__4100__auto__) {
             var xs__4587__auto__ = temp__4100__auto__;
-            var vec__13236 = cljs.core.first.call(null, xs__4587__auto__);
-            var k = cljs.core.nth.call(null, vec__13236, 0, null);
-            var v = cljs.core.nth.call(null, vec__13236, 1, null);
+            var vec__2978 = cljs.core.first.call(null, xs__4587__auto__);
+            var k = cljs.core.nth.call(null, vec__2978, 0, null);
+            var v = cljs.core.nth.call(null, vec__2978, 1, null);
             if(cljs.core.truth_(clojure.set.subset_QMARK_.call(null, components, lightandsound.entities.get_types.call(null, v)))) {
-              return cljs.core.cons.call(null, cljs.core.PersistentVector.fromArray([k, v], true), iter__13233.call(null, cljs.core.rest.call(null, s__13234__$1)))
+              return cljs.core.cons.call(null, cljs.core.PersistentVector.fromArray([k, v], true), iter__2975.call(null, cljs.core.rest.call(null, s__2976__$1)))
             }else {
-              var G__13237 = cljs.core.rest.call(null, s__13234__$1);
-              s__13234__$1 = G__13237;
+              var G__2979 = cljs.core.rest.call(null, s__2976__$1);
+              s__2976__$1 = G__2979;
               continue
             }
           }else {
@@ -21457,13 +21457,13 @@ lightandsound.entities.change_entities = function change_entities(entity_map, ne
   return cljs.core.merge.call(null, entity_map, new_entities)
 };
 lightandsound.entities.get_component = function get_component(entity_components, component_type) {
-  return cljs.core.first.call(null, cljs.core.filter.call(null, function(p1__13238_SHARP_) {
-    return cljs.core._EQ_.call(null, (new cljs.core.Keyword("\ufdd0'type")).call(null, p1__13238_SHARP_), component_type)
+  return cljs.core.first.call(null, cljs.core.filter.call(null, function(p1__2980_SHARP_) {
+    return cljs.core._EQ_.call(null, (new cljs.core.Keyword("\ufdd0'type")).call(null, p1__2980_SHARP_), component_type)
   }, entity_components))
 };
 lightandsound.entities.remove_component = function remove_component(entity_components, component_type) {
-  return cljs.core.filter.call(null, function(p1__13239_SHARP_) {
-    return cljs.core.not_EQ_.call(null, (new cljs.core.Keyword("\ufdd0'type")).call(null, p1__13239_SHARP_), component_type)
+  return cljs.core.filter.call(null, function(p1__2981_SHARP_) {
+    return cljs.core.not_EQ_.call(null, (new cljs.core.Keyword("\ufdd0'type")).call(null, p1__2981_SHARP_), component_type)
   }, entity_components)
 };
 goog.provide("lightandsound.systems");
@@ -21593,19 +21593,19 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup
   var self__ = this;
   return this__2486__auto__.cljs$core$ILookup$_lookup$arity$3(this__2486__auto__, k__2487__auto__, null)
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k2998, else__2489__auto__) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k3008, else__2489__auto__) {
   var self__ = this;
   if("\ufdd0'else") {
-    return cljs.core._lookup.call(null, self__.__extmap, k2998, else__2489__auto__)
+    return cljs.core._lookup.call(null, self__.__extmap, k3008, else__2489__auto__)
   }else {
     return null
   }
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__2997) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__3007) {
   var self__ = this;
-  var pred__3000 = cljs.core.identical_QMARK_;
-  var expr__3001 = k__2494__auto__;
-  return new lightandsound.systems.quanta.QCreationSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__2997), null)
+  var pred__3010 = cljs.core.identical_QMARK_;
+  var expr__3011 = k__2494__auto__;
+  return new lightandsound.systems.quanta.QCreationSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__3007), null)
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 = function(this__2500__auto__, writer__2501__auto__, opts__2502__auto__) {
   var self__ = this;
@@ -21650,9 +21650,9 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IEquiv$_equiv$a
     return false
   }
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__2997) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__3007) {
   var self__ = this;
-  return new lightandsound.systems.quanta.QCreationSystem(G__2997, self__.__extmap, self__.__hash)
+  return new lightandsound.systems.quanta.QCreationSystem(G__3007, self__.__extmap, self__.__hash)
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__2484__auto__) {
   var self__ = this;
@@ -21689,8 +21689,8 @@ lightandsound.systems.quanta.QCreationSystem.cljs$lang$ctorPrWriter = function(t
 lightandsound.systems.quanta.__GT_QCreationSystem = function __GT_QCreationSystem() {
   return new lightandsound.systems.quanta.QCreationSystem
 };
-lightandsound.systems.quanta.map__GT_QCreationSystem = function map__GT_QCreationSystem(G__2999) {
-  return new lightandsound.systems.quanta.QCreationSystem(null, cljs.core.dissoc.call(null, G__2999))
+lightandsound.systems.quanta.map__GT_QCreationSystem = function map__GT_QCreationSystem(G__3009) {
+  return new lightandsound.systems.quanta.QCreationSystem(null, cljs.core.dissoc.call(null, G__3009))
 };
 lightandsound.systems.quanta.quanta_creation_system = function quanta_creation_system() {
   return new lightandsound.systems.quanta.QCreationSystem
@@ -21733,22 +21733,22 @@ lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$ILookup$_looku
   var self__ = this;
   return this__2486__auto__.cljs$core$ILookup$_lookup$arity$3(this__2486__auto__, k__2487__auto__, null)
 };
-lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k13454, else__2489__auto__) {
+lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k2983, else__2489__auto__) {
   var self__ = this;
-  if(k13454 === "\ufdd0'camera") {
+  if(k2983 === "\ufdd0'camera") {
     return self__.camera
   }else {
-    if(k13454 === "\ufdd0'scene") {
+    if(k2983 === "\ufdd0'scene") {
       return self__.scene
     }else {
-      if(k13454 === "\ufdd0'renderer") {
+      if(k2983 === "\ufdd0'renderer") {
         return self__.renderer
       }else {
-        if(k13454 === "\ufdd0'quanta") {
+        if(k2983 === "\ufdd0'quanta") {
           return self__.quanta
         }else {
           if("\ufdd0'else") {
-            return cljs.core._lookup.call(null, self__.__extmap, k13454, else__2489__auto__)
+            return cljs.core._lookup.call(null, self__.__extmap, k2983, else__2489__auto__)
           }else {
             return null
           }
@@ -21757,23 +21757,23 @@ lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$ILookup$_looku
     }
   }
 };
-lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__13453) {
+lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__2982) {
   var self__ = this;
-  var pred__13456 = cljs.core.identical_QMARK_;
-  var expr__13457 = k__2494__auto__;
-  if(pred__13456.call(null, "\ufdd0'camera", expr__13457)) {
-    return new lightandsound.systems.graphics.GraphicsSystem(G__13453, self__.scene, self__.renderer, self__.quanta, self__.__meta, self__.__extmap, null)
+  var pred__2985 = cljs.core.identical_QMARK_;
+  var expr__2986 = k__2494__auto__;
+  if(pred__2985.call(null, "\ufdd0'camera", expr__2986)) {
+    return new lightandsound.systems.graphics.GraphicsSystem(G__2982, self__.scene, self__.renderer, self__.quanta, self__.__meta, self__.__extmap, null)
   }else {
-    if(pred__13456.call(null, "\ufdd0'scene", expr__13457)) {
-      return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, G__13453, self__.renderer, self__.quanta, self__.__meta, self__.__extmap, null)
+    if(pred__2985.call(null, "\ufdd0'scene", expr__2986)) {
+      return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, G__2982, self__.renderer, self__.quanta, self__.__meta, self__.__extmap, null)
     }else {
-      if(pred__13456.call(null, "\ufdd0'renderer", expr__13457)) {
-        return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, G__13453, self__.quanta, self__.__meta, self__.__extmap, null)
+      if(pred__2985.call(null, "\ufdd0'renderer", expr__2986)) {
+        return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, G__2982, self__.quanta, self__.__meta, self__.__extmap, null)
       }else {
-        if(pred__13456.call(null, "\ufdd0'quanta", expr__13457)) {
-          return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, G__13453, self__.__meta, self__.__extmap, null)
+        if(pred__2985.call(null, "\ufdd0'quanta", expr__2986)) {
+          return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, G__2982, self__.__meta, self__.__extmap, null)
         }else {
-          return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, self__.quanta, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__13453), null)
+          return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, self__.quanta, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__2982), null)
         }
       }
     }
@@ -21823,9 +21823,9 @@ lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IEquiv$_equiv$
     return false
   }
 };
-lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__13453) {
+lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__2982) {
   var self__ = this;
-  return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, self__.quanta, G__13453, self__.__extmap, self__.__hash)
+  return new lightandsound.systems.graphics.GraphicsSystem(self__.camera, self__.scene, self__.renderer, self__.quanta, G__2982, self__.__extmap, self__.__hash)
 };
 lightandsound.systems.graphics.GraphicsSystem.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__2484__auto__) {
   var self__ = this;
@@ -21852,28 +21852,28 @@ lightandsound.systems.graphics.GraphicsSystem.prototype.lightandsound$systems$PS
 };
 lightandsound.systems.graphics.GraphicsSystem.prototype.lightandsound$systems$PSystem$run$arity$3 = function(_, globals, ents) {
   var self__ = this;
-  var current_13461 = cljs.core.deref.call(null, self__.quanta);
-  var G__13459_13462 = cljs.core.seq.call(null, ents);
+  var current_2990 = cljs.core.deref.call(null, self__.quanta);
+  var G__2988_2991 = cljs.core.seq.call(null, ents);
   while(true) {
-    if(G__13459_13462) {
-      var ent_13463 = cljs.core.first.call(null, G__13459_13462);
-      if(!cljs.core.contains_QMARK_.call(null, current_13461, cljs.core.first.call(null, ent_13463))) {
-        var new_13464 = new THREE.Mesh(new THREE.SphereGeometry(50, 16, 16), new THREE.MeshLambertMaterial(cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'color"], {"\ufdd0'color":13369344}))));
-        self__.scene.add(new_13464);
-        cljs.core.swap_BANG_.call(null, self__.quanta, cljs.core.assoc, cljs.core.first.call(null, ent_13463), new_13464)
+    if(G__2988_2991) {
+      var ent_2992 = cljs.core.first.call(null, G__2988_2991);
+      if(!cljs.core.contains_QMARK_.call(null, current_2990, cljs.core.first.call(null, ent_2992))) {
+        var new_2993 = new THREE.Mesh(new THREE.SphereGeometry(50, 16, 16), new THREE.MeshLambertMaterial(cljs.core.clj__GT_js.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'color"], {"\ufdd0'color":13369344}))));
+        self__.scene.add(new_2993);
+        cljs.core.swap_BANG_.call(null, self__.quanta, cljs.core.assoc, cljs.core.first.call(null, ent_2992), new_2993)
       }else {
       }
-      var pos_13465 = cljs.core._lookup.call(null, cljs.core.deref.call(null, self__.quanta), cljs.core.first.call(null, ent_13463), null).position;
-      var map__13460_13466 = lightandsound.entities.get_component.call(null, cljs.core.second.call(null, ent_13463), "\ufdd0'position");
-      var map__13460_13467__$1 = cljs.core.seq_QMARK_.call(null, map__13460_13466) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13460_13466) : map__13460_13466;
-      var z_13468 = cljs.core._lookup.call(null, map__13460_13467__$1, "\ufdd0'z", null);
-      var y_13469 = cljs.core._lookup.call(null, map__13460_13467__$1, "\ufdd0'y", null);
-      var x_13470 = cljs.core._lookup.call(null, map__13460_13467__$1, "\ufdd0'x", null);
-      pos_13465["x"] = x_13470;
-      pos_13465["y"] = y_13469;
-      pos_13465["z"] = z_13468;
-      var G__13471 = cljs.core.next.call(null, G__13459_13462);
-      G__13459_13462 = G__13471;
+      var pos_2994 = cljs.core._lookup.call(null, cljs.core.deref.call(null, self__.quanta), cljs.core.first.call(null, ent_2992), null).position;
+      var map__2989_2995 = lightandsound.entities.get_component.call(null, cljs.core.second.call(null, ent_2992), "\ufdd0'position");
+      var map__2989_2996__$1 = cljs.core.seq_QMARK_.call(null, map__2989_2995) ? cljs.core.apply.call(null, cljs.core.hash_map, map__2989_2995) : map__2989_2995;
+      var z_2997 = cljs.core._lookup.call(null, map__2989_2996__$1, "\ufdd0'z", null);
+      var y_2998 = cljs.core._lookup.call(null, map__2989_2996__$1, "\ufdd0'y", null);
+      var x_2999 = cljs.core._lookup.call(null, map__2989_2996__$1, "\ufdd0'x", null);
+      pos_2994["x"] = x_2999;
+      pos_2994["y"] = y_2998;
+      pos_2994["z"] = z_2997;
+      var G__3000 = cljs.core.next.call(null, G__2988_2991);
+      G__2988_2991 = G__3000;
       continue
     }else {
     }
@@ -21892,8 +21892,8 @@ lightandsound.systems.graphics.GraphicsSystem.cljs$lang$ctorPrWriter = function(
 lightandsound.systems.graphics.__GT_GraphicsSystem = function __GT_GraphicsSystem(camera, scene, renderer, quanta) {
   return new lightandsound.systems.graphics.GraphicsSystem(camera, scene, renderer, quanta)
 };
-lightandsound.systems.graphics.map__GT_GraphicsSystem = function map__GT_GraphicsSystem(G__13455) {
-  return new lightandsound.systems.graphics.GraphicsSystem((new cljs.core.Keyword("\ufdd0'camera")).call(null, G__13455), (new cljs.core.Keyword("\ufdd0'scene")).call(null, G__13455), (new cljs.core.Keyword("\ufdd0'renderer")).call(null, G__13455), (new cljs.core.Keyword("\ufdd0'quanta")).call(null, G__13455), null, cljs.core.dissoc.call(null, G__13455, "\ufdd0'camera", "\ufdd0'scene", "\ufdd0'renderer", "\ufdd0'quanta"))
+lightandsound.systems.graphics.map__GT_GraphicsSystem = function map__GT_GraphicsSystem(G__2984) {
+  return new lightandsound.systems.graphics.GraphicsSystem((new cljs.core.Keyword("\ufdd0'camera")).call(null, G__2984), (new cljs.core.Keyword("\ufdd0'scene")).call(null, G__2984), (new cljs.core.Keyword("\ufdd0'renderer")).call(null, G__2984), (new cljs.core.Keyword("\ufdd0'quanta")).call(null, G__2984), null, cljs.core.dissoc.call(null, G__2984, "\ufdd0'camera", "\ufdd0'scene", "\ufdd0'renderer", "\ufdd0'quanta"))
 };
 lightandsound.systems.graphics.graphics_system = function graphics_system() {
   return new lightandsound.systems.graphics.GraphicsSystem(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1E4), new THREE.Scene, new THREE.WebGLRenderer, cljs.core.atom.call(null, cljs.core.ObjMap.EMPTY))
@@ -21904,15 +21904,16 @@ goog.require("lightandsound.systems");
 goog.require("lightandsound.systems");
 goog.require("lightandsound.components");
 goog.require("lightandsound.entities");
-lightandsound.systems.physics.add_velocity = function add_velocity(position, velocity) {
-  return lightandsound.components.position.call(null, (new cljs.core.Keyword("\ufdd0'x")).call(null, position) + (new cljs.core.Keyword("\ufdd0'x")).call(null, velocity), (new cljs.core.Keyword("\ufdd0'y")).call(null, position) + (new cljs.core.Keyword("\ufdd0'y")).call(null, velocity), (new cljs.core.Keyword("\ufdd0'z")).call(null, position) + (new cljs.core.Keyword("\ufdd0'z")).call(null, velocity))
+lightandsound.systems.physics.add_velocity = function add_velocity(position, velocity, td) {
+  console.log(td);
+  return lightandsound.components.position.call(null, (new cljs.core.Keyword("\ufdd0'x")).call(null, position) + (new cljs.core.Keyword("\ufdd0'x")).call(null, velocity) * td, (new cljs.core.Keyword("\ufdd0'y")).call(null, position) + (new cljs.core.Keyword("\ufdd0'y")).call(null, velocity) * td, (new cljs.core.Keyword("\ufdd0'z")).call(null, position) + (new cljs.core.Keyword("\ufdd0'z")).call(null, velocity) * td)
 };
-lightandsound.systems.physics.swap_velocity = function swap_velocity(entity) {
+lightandsound.systems.physics.swap_velocity = function swap_velocity(td, entity) {
   var id = cljs.core.first.call(null, entity);
   var comps = cljs.core.second.call(null, entity);
   var pos = lightandsound.entities.get_component.call(null, comps, "\ufdd0'position");
   var vel = lightandsound.entities.get_component.call(null, comps, "\ufdd0'velocity");
-  return cljs.core.PersistentVector.fromArray([id, cljs.core.conj.call(null, lightandsound.entities.remove_component.call(null, comps, "\ufdd0'position"), lightandsound.systems.physics.add_velocity.call(null, pos, vel))], true)
+  return cljs.core.PersistentVector.fromArray([id, cljs.core.conj.call(null, lightandsound.entities.remove_component.call(null, comps, "\ufdd0'position"), lightandsound.systems.physics.add_velocity.call(null, pos, vel, td))], true)
 };
 goog.provide("lightandsound.systems.physics.PhysicsSystem");
 lightandsound.systems.physics.PhysicsSystem = function(__meta, __extmap) {
@@ -21943,19 +21944,19 @@ lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$
   var self__ = this;
   return this__2486__auto__.cljs$core$ILookup$_lookup$arity$3(this__2486__auto__, k__2487__auto__, null)
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k13911, else__2489__auto__) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k5217, else__2489__auto__) {
   var self__ = this;
   if("\ufdd0'else") {
-    return cljs.core._lookup.call(null, self__.__extmap, k13911, else__2489__auto__)
+    return cljs.core._lookup.call(null, self__.__extmap, k5217, else__2489__auto__)
   }else {
     return null
   }
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__13910) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__5216) {
   var self__ = this;
-  var pred__13913 = cljs.core.identical_QMARK_;
-  var expr__13914 = k__2494__auto__;
-  return new lightandsound.systems.physics.PhysicsSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__13910), null)
+  var pred__5219 = cljs.core.identical_QMARK_;
+  var expr__5220 = k__2494__auto__;
+  return new lightandsound.systems.physics.PhysicsSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__5216), null)
 };
 lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 = function(this__2500__auto__, writer__2501__auto__, opts__2502__auto__) {
   var self__ = this;
@@ -22000,9 +22001,9 @@ lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IEquiv$_equiv$ar
     return false
   }
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__13910) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__5216) {
   var self__ = this;
-  return new lightandsound.systems.physics.PhysicsSystem(G__13910, self__.__extmap, self__.__hash)
+  return new lightandsound.systems.physics.PhysicsSystem(G__5216, self__.__extmap, self__.__hash)
 };
 lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__2484__auto__) {
   var self__ = this;
@@ -22027,7 +22028,8 @@ lightandsound.systems.physics.PhysicsSystem.prototype.lightandsound$systems$PSys
 };
 lightandsound.systems.physics.PhysicsSystem.prototype.lightandsound$systems$PSystem$run$arity$3 = function(_, globals, ents) {
   var self__ = this;
-  return cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, cljs.core.map.call(null, lightandsound.systems.physics.swap_velocity, ents))
+  var td = (new cljs.core.Keyword("\ufdd0'delta")).call(null, globals);
+  return cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, cljs.core.map.call(null, cljs.core.partial.call(null, lightandsound.systems.physics.swap_velocity, td), ents))
 };
 lightandsound.systems.physics.PhysicsSystem.cljs$lang$type = true;
 lightandsound.systems.physics.PhysicsSystem.cljs$lang$ctorPrSeq = function(this__2521__auto__) {
@@ -22039,8 +22041,8 @@ lightandsound.systems.physics.PhysicsSystem.cljs$lang$ctorPrWriter = function(th
 lightandsound.systems.physics.__GT_PhysicsSystem = function __GT_PhysicsSystem() {
   return new lightandsound.systems.physics.PhysicsSystem
 };
-lightandsound.systems.physics.map__GT_PhysicsSystem = function map__GT_PhysicsSystem(G__13912) {
-  return new lightandsound.systems.physics.PhysicsSystem(null, cljs.core.dissoc.call(null, G__13912))
+lightandsound.systems.physics.map__GT_PhysicsSystem = function map__GT_PhysicsSystem(G__5218) {
+  return new lightandsound.systems.physics.PhysicsSystem(null, cljs.core.dissoc.call(null, G__5218))
 };
 lightandsound.systems.physics.physics_system = function physics_system() {
   return new lightandsound.systems.physics.PhysicsSystem
@@ -22056,24 +22058,24 @@ goog.require("lightandsound.systems.graphics");
 goog.require("lightandsound.systems");
 goog.require("lightandsound.components");
 goog.require("lightandsound.entities");
-lightandsound.core.get_global_values = function get_global_values() {
-  return cljs.core.ObjMap.EMPTY
-};
 lightandsound.core.entities = cljs.core.atom.call(null, cljs.core.ObjMap.fromObject(["\ufdd0'best-guy"], {"\ufdd0'best-guy":cljs.core.PersistentVector.fromArray([lightandsound.components.position.call(null, -1100, 0, 0), lightandsound.components.velocity.call(null, 10, 0, 0)], true)}));
 lightandsound.core.systems = cljs.core.PersistentVector.fromArray([lightandsound.systems.graphics.graphics_system.call(null), lightandsound.systems.quanta.quanta_creation_system.call(null), lightandsound.systems.physics.physics_system.call(null)], true);
-lightandsound.core.animation_loop = function animation_loop(time) {
+lightandsound.core.last_tick = cljs.core.atom.call(null, 0);
+lightandsound.core.animation_loop = function animation_loop(t) {
   window.webkitRequestAnimationFrame(animation_loop);
-  var G__13664 = cljs.core.seq.call(null, lightandsound.core.systems);
+  var time_delta = (t - cljs.core.deref.call(null, lightandsound.core.last_tick)) / 1E3;
+  var globals = cljs.core.ObjMap.fromObject(["\ufdd0'delta", "\ufdd0'now"], {"\ufdd0'delta":time_delta, "\ufdd0'now":lightandsound.core.time});
+  cljs.core.reset_BANG_.call(null, lightandsound.core.last_tick, t);
+  var G__5862 = cljs.core.seq.call(null, lightandsound.core.systems);
   while(true) {
-    if(G__13664) {
-      var s = cljs.core.first.call(null, G__13664);
-      var needed_components_13665 = lightandsound.systems.components.call(null, s);
-      var needed_entities_13666 = lightandsound.entities.get_with_components.call(null, cljs.core.deref.call(null, lightandsound.core.entities), needed_components_13665);
-      var globals_13667 = lightandsound.core.get_global_values.call(null);
-      var changed_13668 = lightandsound.systems.run.call(null, s, globals_13667, needed_entities_13666);
-      cljs.core.swap_BANG_.call(null, lightandsound.core.entities, lightandsound.entities.change_entities, changed_13668);
-      var G__13669 = cljs.core.next.call(null, G__13664);
-      G__13664 = G__13669;
+    if(G__5862) {
+      var s = cljs.core.first.call(null, G__5862);
+      var needed_components_5863 = lightandsound.systems.components.call(null, s);
+      var needed_entities_5864 = lightandsound.entities.get_with_components.call(null, cljs.core.deref.call(null, lightandsound.core.entities), needed_components_5863);
+      var changed_5865 = lightandsound.systems.run.call(null, s, globals, needed_entities_5864);
+      cljs.core.swap_BANG_.call(null, lightandsound.core.entities, lightandsound.entities.change_entities, changed_5865);
+      var G__5866 = cljs.core.next.call(null, G__5862);
+      G__5862 = G__5866;
       continue
     }else {
       return null
@@ -22082,18 +22084,19 @@ lightandsound.core.animation_loop = function animation_loop(time) {
   }
 };
 lightandsound.core.main = function main() {
-  var G__13671_13672 = cljs.core.seq.call(null, lightandsound.core.systems);
+  var G__5868_5869 = cljs.core.seq.call(null, lightandsound.core.systems);
   while(true) {
-    if(G__13671_13672) {
-      var s_13673 = cljs.core.first.call(null, G__13671_13672);
-      lightandsound.systems.setup.call(null, s_13673);
-      var G__13674 = cljs.core.next.call(null, G__13671_13672);
-      G__13671_13672 = G__13674;
+    if(G__5868_5869) {
+      var s_5870 = cljs.core.first.call(null, G__5868_5869);
+      lightandsound.systems.setup.call(null, s_5870);
+      var G__5871 = cljs.core.next.call(null, G__5868_5869);
+      G__5868_5869 = G__5871;
       continue
     }else {
     }
     break
   }
-  return lightandsound.core.animation_loop.call(null, (new Date).getTime())
+  var start_time = Date.now();
+  return lightandsound.core.animation_loop.call(null, start_time)
 };
 lightandsound.core.main.call(null);
