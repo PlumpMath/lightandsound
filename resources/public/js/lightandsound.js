@@ -21565,12 +21565,13 @@ goog.require("lightandsound.systems");
 goog.require("lightandsound.components");
 goog.require("lightandsound.entities");
 goog.provide("lightandsound.systems.quanta.QCreationSystem");
-lightandsound.systems.quanta.QCreationSystem = function(__meta, __extmap) {
+lightandsound.systems.quanta.QCreationSystem = function(schedule, __meta, __extmap) {
+  this.schedule = schedule;
   this.__meta = __meta;
   this.__extmap = __extmap;
   this.cljs$lang$protocol_mask$partition1$ = 0;
   this.cljs$lang$protocol_mask$partition0$ = 2229667594;
-  if(arguments.length > 0) {
+  if(arguments.length > 1) {
     this.__meta = __meta;
     this.__extmap = __extmap
   }else {
@@ -21593,26 +21594,34 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup
   var self__ = this;
   return this__2486__auto__.cljs$core$ILookup$_lookup$arity$3(this__2486__auto__, k__2487__auto__, null)
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k3008, else__2489__auto__) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k10330, else__2489__auto__) {
   var self__ = this;
-  if("\ufdd0'else") {
-    return cljs.core._lookup.call(null, self__.__extmap, k3008, else__2489__auto__)
+  if(k10330 === "\ufdd0'schedule") {
+    return self__.schedule
   }else {
-    return null
+    if("\ufdd0'else") {
+      return cljs.core._lookup.call(null, self__.__extmap, k10330, else__2489__auto__)
+    }else {
+      return null
+    }
   }
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__3007) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__10329) {
   var self__ = this;
-  var pred__3010 = cljs.core.identical_QMARK_;
-  var expr__3011 = k__2494__auto__;
-  return new lightandsound.systems.quanta.QCreationSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__3007), null)
+  var pred__10332 = cljs.core.identical_QMARK_;
+  var expr__10333 = k__2494__auto__;
+  if(pred__10332.call(null, "\ufdd0'schedule", expr__10333)) {
+    return new lightandsound.systems.quanta.QCreationSystem(G__10329, self__.__meta, self__.__extmap, null)
+  }else {
+    return new lightandsound.systems.quanta.QCreationSystem(self__.schedule, self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__10329), null)
+  }
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 = function(this__2500__auto__, writer__2501__auto__, opts__2502__auto__) {
   var self__ = this;
   var pr_pair__2503__auto__ = function(keyval__2504__auto__) {
     return cljs.core.pr_sequential_writer.call(null, writer__2501__auto__, cljs.core.pr_writer, "", " ", "", opts__2502__auto__, keyval__2504__auto__)
   };
-  return cljs.core.pr_sequential_writer.call(null, writer__2501__auto__, pr_pair__2503__auto__, [cljs.core.str("#"), cljs.core.str("QCreationSystem"), cljs.core.str("{")].join(""), ", ", "}", opts__2502__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.EMPTY, self__.__extmap))
+  return cljs.core.pr_sequential_writer.call(null, writer__2501__auto__, pr_pair__2503__auto__, [cljs.core.str("#"), cljs.core.str("QCreationSystem"), cljs.core.str("{")].join(""), ", ", "}", opts__2502__auto__, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0'schedule", self__.schedule)], true), self__.__extmap))
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ICollection$_conj$arity$2 = function(this__2491__auto__, entry__2492__auto__) {
   var self__ = this;
@@ -21624,11 +21633,11 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ICollection$_co
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ISeqable$_seq$arity$1 = function(this__2498__auto__) {
   var self__ = this;
-  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.EMPTY, self__.__extmap))
+  return cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core.PersistentVector.fromArray([cljs.core.vector.call(null, "\ufdd0'schedule", self__.schedule)], true), self__.__extmap))
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$ICounted$_count$arity$1 = function(this__2490__auto__) {
   var self__ = this;
-  return 0 + cljs.core.count.call(null, self__.__extmap)
+  return 1 + cljs.core.count.call(null, self__.__extmap)
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IEquiv$_equiv$arity$2 = function(this__2482__auto__, other__2483__auto__) {
   var self__ = this;
@@ -21650,9 +21659,9 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IEquiv$_equiv$a
     return false
   }
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__3007) {
+lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__10329) {
   var self__ = this;
-  return new lightandsound.systems.quanta.QCreationSystem(G__3007, self__.__extmap, self__.__hash)
+  return new lightandsound.systems.quanta.QCreationSystem(self__.schedule, G__10329, self__.__extmap, self__.__hash)
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__2484__auto__) {
   var self__ = this;
@@ -21660,10 +21669,10 @@ lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IMeta$_meta$ari
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.cljs$core$IMap$_dissoc$arity$2 = function(this__2495__auto__, k__2496__auto__) {
   var self__ = this;
-  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.EMPTY, k__2496__auto__)) {
+  if(cljs.core.contains_QMARK_.call(null, cljs.core.PersistentHashSet.fromArray(["\ufdd0'schedule"]), k__2496__auto__)) {
     return cljs.core.dissoc.call(null, cljs.core.with_meta.call(null, cljs.core.into.call(null, cljs.core.ObjMap.EMPTY, this__2495__auto__), self__.__meta), k__2496__auto__)
   }else {
-    return new lightandsound.systems.quanta.QCreationSystem(self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__2496__auto__)), null)
+    return new lightandsound.systems.quanta.QCreationSystem(self__.schedule, self__.__meta, cljs.core.not_empty.call(null, cljs.core.dissoc.call(null, self__.__extmap, k__2496__auto__)), null)
   }
 };
 lightandsound.systems.quanta.QCreationSystem.prototype.lightandsound$systems$PSystem$ = true;
@@ -21675,9 +21684,17 @@ lightandsound.systems.quanta.QCreationSystem.prototype.lightandsound$systems$PSy
   var self__ = this;
   return null
 };
-lightandsound.systems.quanta.QCreationSystem.prototype.lightandsound$systems$PSystem$run$arity$3 = function(_, globals, ents) {
+lightandsound.systems.quanta.QCreationSystem.prototype.lightandsound$systems$PSystem$run$arity$3 = function(_, globals, ___$1) {
   var self__ = this;
-  return cljs.core.PersistentArrayMap.fromArrays([lightandsound.entities.gen_id.call(null)], [cljs.core.PersistentVector.fromArray([lightandsound.components.position.call(null, -1100, 0, 0), lightandsound.components.velocity.call(null, 10, 0, 0)], true)])
+  var time = (new cljs.core.Keyword("\ufdd0'now")).call(null, globals);
+  var delta = (new cljs.core.Keyword("\ufdd0'delta")).call(null, globals);
+  if(time > cljs.core.deref.call(null, self__.schedule)) {
+    console.log("schedule it yo");
+    cljs.core.reset_BANG_.call(null, self__.schedule, 5E3 + time);
+    return cljs.core.PersistentArrayMap.fromArrays([lightandsound.entities.gen_id.call(null)], [cljs.core.PersistentVector.fromArray([lightandsound.components.position.call(null, -1100, 0, 0), lightandsound.components.velocity.call(null, 100, 0, 0)], true)])
+  }else {
+    return null
+  }
 };
 lightandsound.systems.quanta.QCreationSystem.cljs$lang$type = true;
 lightandsound.systems.quanta.QCreationSystem.cljs$lang$ctorPrSeq = function(this__2521__auto__) {
@@ -21686,14 +21703,14 @@ lightandsound.systems.quanta.QCreationSystem.cljs$lang$ctorPrSeq = function(this
 lightandsound.systems.quanta.QCreationSystem.cljs$lang$ctorPrWriter = function(this__2521__auto__, writer__2522__auto__) {
   return cljs.core._write.call(null, writer__2522__auto__, "lightandsound.systems.quanta/QCreationSystem")
 };
-lightandsound.systems.quanta.__GT_QCreationSystem = function __GT_QCreationSystem() {
-  return new lightandsound.systems.quanta.QCreationSystem
+lightandsound.systems.quanta.__GT_QCreationSystem = function __GT_QCreationSystem(schedule) {
+  return new lightandsound.systems.quanta.QCreationSystem(schedule)
 };
-lightandsound.systems.quanta.map__GT_QCreationSystem = function map__GT_QCreationSystem(G__3009) {
-  return new lightandsound.systems.quanta.QCreationSystem(null, cljs.core.dissoc.call(null, G__3009))
+lightandsound.systems.quanta.map__GT_QCreationSystem = function map__GT_QCreationSystem(G__10331) {
+  return new lightandsound.systems.quanta.QCreationSystem((new cljs.core.Keyword("\ufdd0'schedule")).call(null, G__10331), null, cljs.core.dissoc.call(null, G__10331, "\ufdd0'schedule"))
 };
 lightandsound.systems.quanta.quanta_creation_system = function quanta_creation_system() {
-  return new lightandsound.systems.quanta.QCreationSystem
+  return new lightandsound.systems.quanta.QCreationSystem(cljs.core.atom.call(null, 0))
 };
 goog.provide("lightandsound.systems.graphics");
 goog.require("cljs.core");
@@ -21905,7 +21922,6 @@ goog.require("lightandsound.systems");
 goog.require("lightandsound.components");
 goog.require("lightandsound.entities");
 lightandsound.systems.physics.add_velocity = function add_velocity(position, velocity, td) {
-  console.log(td);
   return lightandsound.components.position.call(null, (new cljs.core.Keyword("\ufdd0'x")).call(null, position) + (new cljs.core.Keyword("\ufdd0'x")).call(null, velocity) * td, (new cljs.core.Keyword("\ufdd0'y")).call(null, position) + (new cljs.core.Keyword("\ufdd0'y")).call(null, velocity) * td, (new cljs.core.Keyword("\ufdd0'z")).call(null, position) + (new cljs.core.Keyword("\ufdd0'z")).call(null, velocity) * td)
 };
 lightandsound.systems.physics.swap_velocity = function swap_velocity(td, entity) {
@@ -21944,19 +21960,19 @@ lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$
   var self__ = this;
   return this__2486__auto__.cljs$core$ILookup$_lookup$arity$3(this__2486__auto__, k__2487__auto__, null)
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k5217, else__2489__auto__) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$ILookup$_lookup$arity$3 = function(this__2488__auto__, k6327, else__2489__auto__) {
   var self__ = this;
   if("\ufdd0'else") {
-    return cljs.core._lookup.call(null, self__.__extmap, k5217, else__2489__auto__)
+    return cljs.core._lookup.call(null, self__.__extmap, k6327, else__2489__auto__)
   }else {
     return null
   }
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__5216) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(this__2493__auto__, k__2494__auto__, G__6326) {
   var self__ = this;
-  var pred__5219 = cljs.core.identical_QMARK_;
-  var expr__5220 = k__2494__auto__;
-  return new lightandsound.systems.physics.PhysicsSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__5216), null)
+  var pred__6329 = cljs.core.identical_QMARK_;
+  var expr__6330 = k__2494__auto__;
+  return new lightandsound.systems.physics.PhysicsSystem(self__.__meta, cljs.core.assoc.call(null, self__.__extmap, k__2494__auto__, G__6326), null)
 };
 lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IPrintWithWriter$_pr_writer$arity$3 = function(this__2500__auto__, writer__2501__auto__, opts__2502__auto__) {
   var self__ = this;
@@ -22001,9 +22017,9 @@ lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IEquiv$_equiv$ar
     return false
   }
 };
-lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__5216) {
+lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(this__2485__auto__, G__6326) {
   var self__ = this;
-  return new lightandsound.systems.physics.PhysicsSystem(G__5216, self__.__extmap, self__.__hash)
+  return new lightandsound.systems.physics.PhysicsSystem(G__6326, self__.__extmap, self__.__hash)
 };
 lightandsound.systems.physics.PhysicsSystem.prototype.cljs$core$IMeta$_meta$arity$1 = function(this__2484__auto__) {
   var self__ = this;
@@ -22041,8 +22057,8 @@ lightandsound.systems.physics.PhysicsSystem.cljs$lang$ctorPrWriter = function(th
 lightandsound.systems.physics.__GT_PhysicsSystem = function __GT_PhysicsSystem() {
   return new lightandsound.systems.physics.PhysicsSystem
 };
-lightandsound.systems.physics.map__GT_PhysicsSystem = function map__GT_PhysicsSystem(G__5218) {
-  return new lightandsound.systems.physics.PhysicsSystem(null, cljs.core.dissoc.call(null, G__5218))
+lightandsound.systems.physics.map__GT_PhysicsSystem = function map__GT_PhysicsSystem(G__6328) {
+  return new lightandsound.systems.physics.PhysicsSystem(null, cljs.core.dissoc.call(null, G__6328))
 };
 lightandsound.systems.physics.physics_system = function physics_system() {
   return new lightandsound.systems.physics.PhysicsSystem
@@ -22064,18 +22080,18 @@ lightandsound.core.last_tick = cljs.core.atom.call(null, 0);
 lightandsound.core.animation_loop = function animation_loop(t) {
   window.webkitRequestAnimationFrame(animation_loop);
   var time_delta = (t - cljs.core.deref.call(null, lightandsound.core.last_tick)) / 1E3;
-  var globals = cljs.core.ObjMap.fromObject(["\ufdd0'delta", "\ufdd0'now"], {"\ufdd0'delta":time_delta, "\ufdd0'now":lightandsound.core.time});
+  var globals = cljs.core.ObjMap.fromObject(["\ufdd0'delta", "\ufdd0'now"], {"\ufdd0'delta":time_delta, "\ufdd0'now":t});
   cljs.core.reset_BANG_.call(null, lightandsound.core.last_tick, t);
-  var G__5862 = cljs.core.seq.call(null, lightandsound.core.systems);
+  var G__9865 = cljs.core.seq.call(null, lightandsound.core.systems);
   while(true) {
-    if(G__5862) {
-      var s = cljs.core.first.call(null, G__5862);
-      var needed_components_5863 = lightandsound.systems.components.call(null, s);
-      var needed_entities_5864 = lightandsound.entities.get_with_components.call(null, cljs.core.deref.call(null, lightandsound.core.entities), needed_components_5863);
-      var changed_5865 = lightandsound.systems.run.call(null, s, globals, needed_entities_5864);
-      cljs.core.swap_BANG_.call(null, lightandsound.core.entities, lightandsound.entities.change_entities, changed_5865);
-      var G__5866 = cljs.core.next.call(null, G__5862);
-      G__5862 = G__5866;
+    if(G__9865) {
+      var s = cljs.core.first.call(null, G__9865);
+      var needed_components_9866 = lightandsound.systems.components.call(null, s);
+      var needed_entities_9867 = lightandsound.entities.get_with_components.call(null, cljs.core.deref.call(null, lightandsound.core.entities), needed_components_9866);
+      var changed_9868 = lightandsound.systems.run.call(null, s, globals, needed_entities_9867);
+      cljs.core.swap_BANG_.call(null, lightandsound.core.entities, lightandsound.entities.change_entities, changed_9868);
+      var G__9869 = cljs.core.next.call(null, G__9865);
+      G__9865 = G__9869;
       continue
     }else {
       return null
@@ -22084,13 +22100,13 @@ lightandsound.core.animation_loop = function animation_loop(t) {
   }
 };
 lightandsound.core.main = function main() {
-  var G__5868_5869 = cljs.core.seq.call(null, lightandsound.core.systems);
+  var G__9871_9872 = cljs.core.seq.call(null, lightandsound.core.systems);
   while(true) {
-    if(G__5868_5869) {
-      var s_5870 = cljs.core.first.call(null, G__5868_5869);
-      lightandsound.systems.setup.call(null, s_5870);
-      var G__5871 = cljs.core.next.call(null, G__5868_5869);
-      G__5868_5869 = G__5871;
+    if(G__9871_9872) {
+      var s_9873 = cljs.core.first.call(null, G__9871_9872);
+      lightandsound.systems.setup.call(null, s_9873);
+      var G__9874 = cljs.core.next.call(null, G__9871_9872);
+      G__9871_9872 = G__9874;
       continue
     }else {
     }

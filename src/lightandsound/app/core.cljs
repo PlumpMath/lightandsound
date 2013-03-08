@@ -11,19 +11,20 @@
                                 (comp/velocity 10 0 0)]}))
 (def systems [(graphics-system)
               (quanta-creation-system)
-              (physics-system)
-])
+              (physics-system)])
+
 (def last-tick (atom 0))
 (defn animation-loop [t]
   (.webkitRequestAnimationFrame js/window animation-loop)
   (let [time-delta (/ (- t @last-tick) 1000)
-        globals {:delta time-delta :now time}]
+        globals {:delta time-delta :now t}]
     (reset! last-tick t)
 
     ;; call all systems with relevant data.
     (doseq [s systems]
       (let [needed-components (sys/components s)
-            needed-entities (ent/get-with-components @entities needed-components)
+            needed-entities
+            (ent/get-with-components @entities needed-components)
             changed (sys/run s globals needed-entities)]
         (swap! entities ent/change-entities changed)))))
 

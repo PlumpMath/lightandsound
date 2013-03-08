@@ -5,7 +5,6 @@
 
 (defn add-velocity
   [position velocity td]
-  (.log js/console td)
   (components/position
    (+ (:x position) (* (:x velocity) td))
    (+ (:y position) (* (:y velocity) td))
