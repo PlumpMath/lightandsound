@@ -1,12 +1,11 @@
 # lightandsound
 
-A Clojure library designed to ... well, that part is up to you.
+One of my first experiments in making a game with clojurescript.
+This is now abandoned and I'm working on other games. Many of the same ideas I had when making this one I still use though.
+Especially the component entity system approach.
 
-## Usage
+If you are interested in clojure and clojurescript games and want to discuss things hit me up.
 
-FIXME
-
-## License
 
 Copyright © 2013 FIXME
 
